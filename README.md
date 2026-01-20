@@ -44,6 +44,19 @@ GPT-Load serves as a transparent proxy service, completely preserving the native
 - MySQL, PostgreSQL, or SQLite (for database storage)
 - Redis (for caching and distributed coordination, optional)
 
+### Method 0: One-Click Script (Local Build)
+
+```bash
+# Clone and enter the project
+git clone https://github.com/tbphp/gpt-load.git
+cd gpt-load
+
+# One-click deploy (enter or auto-generate AUTH_KEY and start services)
+bash scripts/one-click.sh
+```
+
+The script prompts for an `AUTH_KEY` (leave empty to auto-generate), writes it to `.env`, and runs a local build. Please store it securely.
+
 ### Method 1: Docker Quick Start
 
 ```bash
@@ -102,6 +115,20 @@ After deployment:
 - API Proxy Address: <http://localhost:3001/proxy>
 
 > Use your modified AUTH_KEY to log in to the management interface.
+
+### GitHub Actions Deployment (Example)
+
+This repository includes a manual deployment workflow intended for servers that already have a runtime environment prepared.
+
+1. Prepare a runtime directory on the server (example: `/opt/gpt-load`) and configure `.env`.
+2. In `Settings > Secrets and variables > Actions`, add these secrets:
+   - `DEPLOY_HOST`: server address
+   - `DEPLOY_USER`: SSH username
+   - `DEPLOY_SSH_KEY`: SSH private key (make sure the public key is on the server)
+   - `DEPLOY_PORT`: SSH port (e.g. `22`)
+3. Trigger the `Deploy` workflow in GitHub Actions, fill in `deploy_path`, and optionally `service_name` to restart a systemd service.
+
+The workflow builds frontend/backend, uploads `dist/gpt-load` to the server, and optionally restarts the systemd service.
 
 ### Method 3: Source Build
 

@@ -44,6 +44,19 @@ GPT-Loadは、さまざまなAIサービスプロバイダーのネイティブA
 - MySQL、PostgreSQL、またはSQLite（データベースストレージ用）
 - Redis（キャッシュと分散調整用、オプション）
 
+### 方法0: ワンクリックスクリプト（ローカルビルド）
+
+```bash
+# リポジトリをクローンして移動
+git clone https://github.com/tbphp/gpt-load.git
+cd gpt-load
+
+# ワンクリックでデプロイ（AUTH_KEYを入力または自動生成して起動）
+bash scripts/one-click.sh
+```
+
+スクリプトが `AUTH_KEY` の入力を求めます（空なら自動生成）。`.env` に書き込み、ローカルビルドを実行します。安全に保管してください。
+
 ### 方法1: Dockerクイックスタート
 
 ```bash
@@ -102,6 +115,20 @@ docker compose pull && docker compose down && docker compose up -d
 - APIプロキシアドレス：<http://localhost:3001/proxy>
 
 > 変更したAUTH_KEYを使用して管理インターフェースにログインしてください。
+
+### GitHub Actions デプロイ（例）
+
+リポジトリには手動実行のデプロイワークフローがあり、サーバー側の実行環境が準備済みの場合に利用できます。
+
+1. サーバーに実行ディレクトリ（例：`/opt/gpt-load`）を用意し、`.env` を設定します。
+2. `Settings > Secrets and variables > Actions` に以下の Secrets を追加します：
+   - `DEPLOY_HOST`: サーバーのアドレス
+   - `DEPLOY_USER`: SSH ユーザー名
+   - `DEPLOY_SSH_KEY`: SSH 秘密鍵（公開鍵をサーバーに登録）
+   - `DEPLOY_PORT`: SSH ポート（例：`22`）
+3. GitHub Actions で `Deploy` ワークフローを手動実行し、`deploy_path` を入力、必要なら `service_name` に systemd サービス名を指定します。
+
+ワークフローはフロント/バックエンドをビルドし、`dist/gpt-load` をサーバーへアップロードし、必要に応じて systemd を再起動します。
 
 ### 方法3: ソースビルド
 
