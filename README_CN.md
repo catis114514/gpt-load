@@ -1,5 +1,7 @@
 # GPT-Load
 
+> ⚠️ 本仓库**不是官方仓库**，官方项目请访问：https://github.com/tbphp/gpt-load
+
 [English](README.md) | 中文 | [日本語](README_JP.md)
 
 [![Release](https://img.shields.io/github/v/release/tbphp/gpt-load)](https://github.com/tbphp/gpt-load/releases)

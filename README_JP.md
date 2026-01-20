@@ -1,5 +1,7 @@
 # GPT-Load
 
+> ⚠️ このリポジトリは**公式ではありません**。公式プロジェクトはこちら：https://github.com/tbphp/gpt-load
+
 [English](README.md) | [中文](README_CN.md) | 日本語
 
 [![Release](https://img.shields.io/github/v/release/tbphp/gpt-load)](https://github.com/tbphp/gpt-load/releases)
