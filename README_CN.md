@@ -53,11 +53,11 @@ GPT-Load 作为透明代理服务，完整保留各 AI 服务商的原生 API �
 git clone https://github.com/tbphp/gpt-load.git
 cd gpt-load
 
-# 一键运行（输入或自动生成 AUTH_KEY 并启动）
+# 一键运行（管理菜单）
 bash scripts/one-click.sh
 ```
 
-脚本会提示你输入 `AUTH_KEY`（留空则自动生成），并写入 `.env`，然后运行 `dist/gpt-load` 预构建二进制。如果系统存在 systemd，会安装名为 `gpt-load` 的服务（可用 `SERVICE_NAME` 覆盖）并设置开机自启；否则会后台运行。请先在其他机器完成构建并上传到 `dist/` 目录，再执行该脚本，并务必妥善保存密钥。
+脚本会展示管理菜单。选择**安装/更新**后，会提示你输入 `AUTH_KEY`（留空则自动生成），将二进制移动到 `/usr/local/bin/gpt-load`，将配置写入 `/etc/gpt-load/env`，并安装名为 `gpt-load` 的 systemd 服务（可用 `SERVICE_NAME` 覆盖）。非 systemd 环境会后台运行并限制日志文件大小（5MB）。请先在其他机器完成构建并上传 `dist/gpt-load` 后再执行。脚本还支持启动/停止服务、查看日志、编辑配置与卸载，并在安装后询问是否删除当前目录以节省空间。
 
 ### 方式一：Docker 快速开始
 

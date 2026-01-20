@@ -53,11 +53,11 @@ GPT-Load serves as a transparent proxy service, completely preserving the native
 git clone https://github.com/tbphp/gpt-load.git
 cd gpt-load
 
-# One-click run (enter or auto-generate AUTH_KEY and start services)
+# One-click run (menu-driven)
 bash scripts/one-click.sh
 ```
 
-The script prompts for an `AUTH_KEY` (leave empty to auto-generate), writes it to `.env`, and runs the prebuilt binary from `dist/gpt-load`. If systemd is available, it installs a service named `gpt-load` (override with `SERVICE_NAME`) and enables it at boot; otherwise it starts the binary in the background. Build on another machine and upload the binary to `dist/` before running this script. Please store the key securely.
+The script provides a management menu. Choose **Install/Update** to prompt for `AUTH_KEY` (leave empty to auto-generate), then it moves the binary to `/usr/local/bin/gpt-load`, writes config to `/etc/gpt-load/env`, and installs a systemd service named `gpt-load` (override with `SERVICE_NAME`). On non-systemd systems it runs the binary in the background and limits log file size (5MB) to avoid disk bloat. Build on another machine and upload `dist/gpt-load` before installing. The script can also start/stop the service, view logs, edit config, or uninstall, and will optionally delete the install directory to save space.
 
 ### Method 1: Docker Quick Start
 
