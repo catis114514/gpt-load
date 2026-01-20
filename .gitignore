@@ -21,6 +21,8 @@ go.work
 # Build output
 build/
 dist/
+!web/dist/
+!web/dist/index.html
 bin/
 
 # Environment variables
