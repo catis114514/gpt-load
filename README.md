@@ -57,7 +57,7 @@ cd gpt-load
 bash scripts/one-click.sh
 ```
 
-The script provides a management menu. Choose **Install/Update** to prompt for `AUTH_KEY` (leave empty to auto-generate), then it moves the binary to `/usr/local/bin/gpt-load`, writes config to `/etc/gpt-load/env`, and installs a systemd service named `gpt-load` (override with `SERVICE_NAME`). On non-systemd systems it runs the binary in the background and limits log file size (5MB) to avoid disk bloat. Build on another machine and upload `dist/gpt-load` before installing. The script can also start/stop the service, view logs, edit config, or uninstall, and will optionally delete the install directory to save space.
+The script provides a management menu. Choose **Install/Update** to prompt for `AUTH_KEY` (leave empty to auto-generate), then it moves the binary to `/usr/local/bin/gpt-load`, writes config to `/etc/gpt-load/env` (it creates a minimal file with only `AUTH_KEY` if no `.env` or `.env.example` exists), and installs a systemd service named `gpt-load` (override with `SERVICE_NAME`). On non-systemd systems it runs the binary in the background and limits log file size (5MB) to avoid disk bloat. Build on another machine and upload `dist/gpt-load` before installing. The script can also start/stop the service, view logs, edit config, or uninstall, and will optionally delete the install directory to save space.
 
 ### Method 1: Docker Quick Start
 

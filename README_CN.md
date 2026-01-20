@@ -57,7 +57,7 @@ cd gpt-load
 bash scripts/one-click.sh
 ```
 
-脚本会展示管理菜单。选择**安装/更新**后，会提示你输入 `AUTH_KEY`（留空则自动生成），将二进制移动到 `/usr/local/bin/gpt-load`，将配置写入 `/etc/gpt-load/env`，并安装名为 `gpt-load` 的 systemd 服务（可用 `SERVICE_NAME` 覆盖）。非 systemd 环境会后台运行并限制日志文件大小（5MB）。请先在其他机器完成构建并上传 `dist/gpt-load` 后再执行。脚本还支持启动/停止服务、查看日志、编辑配置与卸载，并在安装后询问是否删除当前目录以节省空间。
+脚本会展示管理菜单。选择**安装/更新**后，会提示你输入 `AUTH_KEY`（留空则自动生成），将二进制移动到 `/usr/local/bin/gpt-load`，将配置写入 `/etc/gpt-load/env`（若无 `.env` 或 `.env.example` 会创建仅包含 `AUTH_KEY` 的最小配置），并安装名为 `gpt-load` 的 systemd 服务（可用 `SERVICE_NAME` 覆盖）。非 systemd 环境会后台运行并限制日志文件大小（5MB）。请先在其他机器完成构建并上传 `dist/gpt-load` 后再执行。脚本还支持启动/停止服务、查看日志、编辑配置与卸载，并在安装后询问是否删除当前目录以节省空间。
 
 ### 方式一：Docker 快速开始
 

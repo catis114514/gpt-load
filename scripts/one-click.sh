@@ -90,8 +90,10 @@ ensure_env_file() {
       cp .env.example .env
       source_env=".env"
     else
-      log "Missing .env or .env.example in the current directory."
-      exit 1
+      mkdir -p "${ENV_DIR}"
+      printf "AUTH_KEY=\n" > "${ENV_FILE}"
+      log "Created minimal config at ${ENV_FILE} (AUTH_KEY only)."
+      source_env="${ENV_FILE}"
     fi
   fi
 
