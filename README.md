@@ -57,7 +57,7 @@ cd gpt-load
 bash scripts/one-click.sh
 ```
 
-The script prompts for an `AUTH_KEY` (leave empty to auto-generate), writes it to `.env`, and runs the prebuilt binary from `dist/gpt-load`. Build on another machine and upload the binary to `dist/` before running this script. Please store the key securely.
+The script prompts for an `AUTH_KEY` (leave empty to auto-generate), writes it to `.env`, and runs the prebuilt binary from `dist/gpt-load`. If systemd is available, it installs a service named `gpt-load` (override with `SERVICE_NAME`) and enables it at boot; otherwise it starts the binary in the background. Build on another machine and upload the binary to `dist/` before running this script. Please store the key securely.
 
 ### Method 1: Docker Quick Start
 

@@ -57,7 +57,7 @@ cd gpt-load
 bash scripts/one-click.sh
 ```
 
-脚本会提示你输入 `AUTH_KEY`（留空则自动生成），并写入 `.env`，然后运行 `dist/gpt-load` 预构建二进制。请先在其他机器完成构建并上传到 `dist/` 目录，再执行该脚本，并务必妥善保存密钥。
+脚本会提示你输入 `AUTH_KEY`（留空则自动生成），并写入 `.env`，然后运行 `dist/gpt-load` 预构建二进制。如果系统存在 systemd，会安装名为 `gpt-load` 的服务（可用 `SERVICE_NAME` 覆盖）并设置开机自启；否则会后台运行。请先在其他机器完成构建并上传到 `dist/` 目录，再执行该脚本，并务必妥善保存密钥。
 
 ### 方式一：Docker 快速开始
 

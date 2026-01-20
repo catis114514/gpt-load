@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SERVICE_NAME="${SERVICE_NAME:-gpt-load}"
+
 log() {
   printf "[gpt-load] %s\n" "$*"
 }
@@ -56,6 +58,50 @@ prompt_auth_key() {
   printf "sk-prod-%s" "$input_key"
 }
 
+run_with_systemd() {
+  local working_dir
+  working_dir="$(pwd)"
+
+  local unit_path="/etc/systemd/system/${SERVICE_NAME}.service"
+  local sudo_cmd=""
+  if [ "$(id -u)" -ne 0 ]; then
+    if ! command_exists sudo; then
+      log "sudo is required to install a systemd service."
+      return 1
+    fi
+    sudo_cmd="sudo"
+  fi
+
+  log "Installing systemd service: ${SERVICE_NAME}"
+  ${sudo_cmd} bash -c "cat > '${unit_path}'" <<UNIT
+[Unit]
+Description=GPT-Load
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=${working_dir}
+EnvironmentFile=${working_dir}/.env
+ExecStart=${working_dir}/dist/gpt-load
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+
+  ${sudo_cmd} systemctl daemon-reload
+  ${sudo_cmd} systemctl enable --now "${SERVICE_NAME}.service"
+  log "Systemd service started. Check status with: systemctl status ${SERVICE_NAME}.service"
+}
+
+run_in_background() {
+  local log_dir="data/logs"
+  mkdir -p "${log_dir}"
+  log "Systemd not available; starting in background (logs: ${log_dir}/gpt-load.out)"
+  nohup ./dist/gpt-load >"${log_dir}/gpt-load.out" 2>&1 &
+}
+
 main() {
   if [ ! -f ".env" ]; then
     if [ ! -f ".env.example" ]; then
@@ -90,8 +136,13 @@ main() {
   fi
 
   chmod +x dist/gpt-load
-  log "Starting backend..."
-  ./dist/gpt-load
+
+  if command_exists systemctl; then
+    run_with_systemd
+    return 0
+  fi
+
+  run_in_background
 }
 
 main "$@"
