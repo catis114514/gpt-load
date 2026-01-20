@@ -53,11 +53,11 @@ GPT-Loadは、さまざまなAIサービスプロバイダーのネイティブA
 git clone https://github.com/tbphp/gpt-load.git
 cd gpt-load
 
-# ワンクリックでデプロイ（AUTH_KEYを入力または自動生成して起動）
+# ワンクリックで起動（AUTH_KEYを入力または自動生成して起動）
 bash scripts/one-click.sh
 ```
 
-スクリプトが `AUTH_KEY` の入力を求めます（空なら自動生成）。`.env` に書き込み、ローカルビルドを実行します。安全に保管してください。
+スクリプトが `AUTH_KEY` の入力を求めます（空なら自動生成）。`.env` に書き込み、`dist/gpt-load` の事前ビルド済みバイナリを起動します。事前に別のマシンでビルドし、`dist/` にアップロードしてから実行してください。安全に保管してください。
 
 ### 方法1: Dockerクイックスタート
 

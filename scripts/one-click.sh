@@ -57,16 +57,6 @@ prompt_auth_key() {
 }
 
 main() {
-  if ! command_exists go; then
-    log "Go is required but was not found."
-    exit 1
-  fi
-
-  if ! command_exists node || ! command_exists npm; then
-    log "Node.js and npm are required but were not found."
-    exit 1
-  fi
-
   if [ ! -f ".env" ]; then
     if [ ! -f ".env.example" ]; then
       log "Missing .env.example in the project root."
@@ -94,14 +84,14 @@ main() {
     log "Please store this key securely."
   fi
 
-  log "Downloading Go modules..."
-  go mod download
+  if [ ! -f "dist/gpt-load" ]; then
+    log "Missing dist/gpt-load. Build on another machine and upload it here."
+    exit 1
+  fi
 
-  log "Building frontend..."
-  (cd web && npm install && npm run build)
-
+  chmod +x dist/gpt-load
   log "Starting backend..."
-  go run ./main.go
+  ./dist/gpt-load
 }
 
 main "$@"

@@ -53,11 +53,11 @@ GPT-Load 作为透明代理服务，完整保留各 AI 服务商的原生 API �
 git clone https://github.com/tbphp/gpt-load.git
 cd gpt-load
 
-# 一键部署（输入或自动生成 AUTH_KEY 并启动）
+# 一键运行（输入或自动生成 AUTH_KEY 并启动）
 bash scripts/one-click.sh
 ```
 
-脚本会提示你输入 `AUTH_KEY`（留空则自动生成），并写入 `.env`，然后执行本地构建与启动，请务必妥善保存。
+脚本会提示你输入 `AUTH_KEY`（留空则自动生成），并写入 `.env`，然后运行 `dist/gpt-load` 预构建二进制。请先在其他机器完成构建并上传到 `dist/` 目录，再执行该脚本，并务必妥善保存密钥。
 
 ### 方式一：Docker 快速开始
 

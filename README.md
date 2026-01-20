@@ -53,11 +53,11 @@ GPT-Load serves as a transparent proxy service, completely preserving the native
 git clone https://github.com/tbphp/gpt-load.git
 cd gpt-load
 
-# One-click deploy (enter or auto-generate AUTH_KEY and start services)
+# One-click run (enter or auto-generate AUTH_KEY and start services)
 bash scripts/one-click.sh
 ```
 
-The script prompts for an `AUTH_KEY` (leave empty to auto-generate), writes it to `.env`, and runs a local build. Please store it securely.
+The script prompts for an `AUTH_KEY` (leave empty to auto-generate), writes it to `.env`, and runs the prebuilt binary from `dist/gpt-load`. Build on another machine and upload the binary to `dist/` before running this script. Please store the key securely.
 
 ### Method 1: Docker Quick Start
 
