@@ -1,7 +1,5 @@
 # GPT-Load
 
-> ⚠️ 本仓库**不是官方仓库**，官方项目请访问：https://github.com/tbphp/gpt-load
-
 [English](README.md) | 中文 | [日本語](README_JP.md)
 
 [![Release](https://img.shields.io/github/v/release/tbphp/gpt-load)](https://github.com/tbphp/gpt-load/releases)
@@ -45,19 +43,6 @@ GPT-Load 作为透明代理服务，完整保留各 AI 服务商的原生 API �
 - Docker (容器化部署)
 - MySQL, PostgreSQL, 或 SQLite (数据库存储)
 - Redis (缓存和分布式协调，可选)
-
-### 方式零：一键脚本部署（本地构建）
-
-```bash
-# 克隆并进入项目
-git clone https://github.com/tbphp/gpt-load.git
-cd gpt-load
-
-# 一键运行（管理菜单）
-bash scripts/one-click.sh
-```
-
-脚本会展示管理菜单。选择**安装/更新**后，会提示你输入 `AUTH_KEY`（留空则自动生成），将二进制移动到 `/usr/local/bin/gpt-load`，将配置写入 `/etc/gpt-load/env`（若无 `.env` 或 `.env.example` 会创建仅包含 `AUTH_KEY` 的最小配置），并安装名为 `gpt-load` 的 systemd 服务（可用 `SERVICE_NAME` 覆盖）。非 systemd 环境会后台运行并限制日志文件大小（5MB）。请先在其他机器完成构建并上传 `dist/gpt-load` 后再执行。脚本还支持启动/停止服务、查看日志、编辑配置与卸载，并在安装后询问是否删除当前目录以节省空间。
 
 ### 方式一：Docker 快速开始
 
@@ -117,20 +102,6 @@ docker compose pull && docker compose down && docker compose up -d
 - API 代理地址：<http://localhost:3001/proxy>
 
 > 使用你修改的 AUTH_KEY 登录管理端。
-
-### GitHub Actions 部署（示例）
-
-仓库内置了一个手动触发的部署流程，适合在你的服务器上已准备好运行环境时使用。
-
-1. 在服务器上准备运行目录（示例：`/opt/gpt-load`）并配置 `.env`。
-2. 在仓库 `Settings > Secrets and variables > Actions` 中添加以下 Secrets：
-   - `DEPLOY_HOST`：服务器地址
-   - `DEPLOY_USER`：SSH 用户名
-   - `DEPLOY_SSH_KEY`：SSH 私钥（请确保已添加到服务器）
-   - `DEPLOY_PORT`：SSH 端口（例如 `22`）
-3. 进入 GitHub Actions，手动触发 `Deploy` 工作流，填写 `deploy_path`，如需重启 systemd 服务则填写 `service_name`。
-
-工作流会构建前端与后端，并上传 `dist/gpt-load` 到服务器，然后可选重启 systemd 服务。
 
 ### 方式三：源码构建
 

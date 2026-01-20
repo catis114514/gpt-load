@@ -1,7 +1,5 @@
 # GPT-Load
 
-> ⚠️ This is **not** the official repository. For the official project, please visit: https://github.com/tbphp/gpt-load
-
 English | [中文](README_CN.md) | [日本語](README_JP.md)
 
 [![Release](https://img.shields.io/github/v/release/tbphp/gpt-load)](https://github.com/tbphp/gpt-load/releases)
@@ -45,19 +43,6 @@ GPT-Load serves as a transparent proxy service, completely preserving the native
 - Docker (for containerized deployment)
 - MySQL, PostgreSQL, or SQLite (for database storage)
 - Redis (for caching and distributed coordination, optional)
-
-### Method 0: One-Click Script (Local Build)
-
-```bash
-# Clone and enter the project
-git clone https://github.com/tbphp/gpt-load.git
-cd gpt-load
-
-# One-click run (menu-driven)
-bash scripts/one-click.sh
-```
-
-The script provides a management menu. Choose **Install/Update** to prompt for `AUTH_KEY` (leave empty to auto-generate), then it moves the binary to `/usr/local/bin/gpt-load`, writes config to `/etc/gpt-load/env` (it creates a minimal file with only `AUTH_KEY` if no `.env` or `.env.example` exists), and installs a systemd service named `gpt-load` (override with `SERVICE_NAME`). On non-systemd systems it runs the binary in the background and limits log file size (5MB) to avoid disk bloat. Build on another machine and upload `dist/gpt-load` before installing. The script can also start/stop the service, view logs, edit config, or uninstall, and will optionally delete the install directory to save space.
 
 ### Method 1: Docker Quick Start
 
@@ -117,20 +102,6 @@ After deployment:
 - API Proxy Address: <http://localhost:3001/proxy>
 
 > Use your modified AUTH_KEY to log in to the management interface.
-
-### GitHub Actions Deployment (Example)
-
-This repository includes a manual deployment workflow intended for servers that already have a runtime environment prepared.
-
-1. Prepare a runtime directory on the server (example: `/opt/gpt-load`) and configure `.env`.
-2. In `Settings > Secrets and variables > Actions`, add these secrets:
-   - `DEPLOY_HOST`: server address
-   - `DEPLOY_USER`: SSH username
-   - `DEPLOY_SSH_KEY`: SSH private key (make sure the public key is on the server)
-   - `DEPLOY_PORT`: SSH port (e.g. `22`)
-3. Trigger the `Deploy` workflow in GitHub Actions, fill in `deploy_path`, and optionally `service_name` to restart a systemd service.
-
-The workflow builds frontend/backend, uploads `dist/gpt-load` to the server, and optionally restarts the systemd service.
 
 ### Method 3: Source Build
 
